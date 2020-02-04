@@ -1,6 +1,6 @@
 {
     "name": "laravel-notification-channels/sailthru-notifications-channel",
-    "description": ":package_description",
+    "description": "SailThru notifications channel for Laravel",
     "homepage": "https://github.com/laravel-notification-channels/sailthru",
     "license": "MIT",
     "authors": [
@@ -12,14 +12,14 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/notifications": "^5.3",
-        "illuminate/support": "^5.1|^5.2|^5.3",
+        "php": ">=7.2",
+        "illuminate/notifications": "~5.5 || ~6.0",
+        "illuminate/support": "~5.5 || ~6.0",
         "sailthru/sailthru-php5-client": "^1.2"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "4.*"
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {
