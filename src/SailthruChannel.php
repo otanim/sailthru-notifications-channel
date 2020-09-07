@@ -91,7 +91,7 @@ class SailthruChannel
                     $notification,
                     'sailthru',
                     [
-                        'message' => $message,
+                        'message' => isset($message) ? $message : null,
                         'exception' => $e,
                     ]
                 )
