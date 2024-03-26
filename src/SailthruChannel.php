@@ -8,6 +8,7 @@ use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Sailthru_Client_Exception;
 
 class SailthruChannel
@@ -66,6 +67,23 @@ class SailthruChannel
             $message->mergeDefaultVars(
                 static::getDefaultVars()
             );
+
+            if (config('services.sailthru.whitelist_check.enabled') === true) {
+                if(!Str::is(
+                    config('services.sailthru.whitelist_check.domains'),
+                    $message->getToEmail()
+                )){
+                    Log::info(
+                        'Sailthru email not sent to ' . $message->getToEmail() . ' due to domain whitelist limitations',
+                        [
+                            'notifiable' => $notifiable,
+                            'notification' => $notification,
+                        ]
+                    );
+
+                    return [];
+                }
+            }
 
             $response = $message->isMultiSend()
                 ? $this->multiSend($message)
